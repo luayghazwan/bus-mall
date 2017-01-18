@@ -1,22 +1,27 @@
 'use strict';
 
 var counter = 0;
-var instances = [];
+var instance = [];
+var index1, index2, index3;
 var images = ['bag','banana','bathroom','boots','breakfast','bubblegum','chair','cthulhu','dog-duck','dragon','pen','pet-sweep','scissors','shark','sweep','tauntaun','unicorn','usb','water-can','wine-glass'];
+// var left = document.getElementById('leftPhoto');
+// var middle = document.getElementById('middlePhoto');
+// var right =
 
 function Image (name, path) {
   this.name = name;
   this.path = path;
-  this.imageCounter = 0;
+  this.timesShown = 0;
+  this.timesClicked = 0;
 };
 
-function instance() {
+function instanceCreator() {
   for (var index = 0; index < images.length ; index++) {
-    instances[index] = new Image(images[index], 'img/' + images[index] + '.jpg');
+    instance[index] = new Image(images[index], 'img/' + images[index] + '.jpg');
   }
 }
-instance();
-console.log(instances);
+instanceCreator();
+console.log(instance);
 
 var sourcePhoto = {
   randomNumber: function() {
@@ -25,36 +30,57 @@ var sourcePhoto = {
   },
   showImage: function() {
     var img1 = document.getElementById('photo-1');
-    var index = this.randomNumber();
-    img1.setAttribute('src', instances[index].path);
+    index1 = this.randomNumber();
+    img1.setAttribute('src', instance[index1].path);
+    instance[index1].timesShown++;
 
     var img2 = document.getElementById('photo-2');
-    var index2 = this.randomNumber();
-    img2.setAttribute('src', instances[index2].path);
+    index2 = this.randomNumber();
+    img2.setAttribute('src', instance[index2].path);
+    instance[index2].timesShown++;
 
     var img3 = document.getElementById('photo-3');
-    var index3 = this.randomNumber();
-    img3.setAttribute('src', instances[index3].path);
+    index3 = this.randomNumber();
+    img3.setAttribute('src', instance[index3].path);
+    instance[index3].timesShown++;
 
-    if (index === index2 || index === index3 || index2 === index3) {
+    if (index1 === index2 || index1 === index3 || index2 === index3) {
       this.showImage();
     }
   }
 };
 sourcePhoto.showImage();
-
 // console.log(instanceImage);
-
 // showImage.textContent = image[index] + '.jpg';
 // img.appendChild(showImage);
 
 var imageOne = document.getElementById('photo-1');
 imageOne.addEventListener('click', photoFunction,false);
 function photoFunction() {
-  console.log(index);
   event.preventDefault();
   event.stopPropagation();
-  clickCounter++;
+  index1 = sourcePhoto.showImage();
+  console.log('no. of clicks: ', index1);
+  instance[index1].timesClicked++;
+  sourcePhoto.showImage();
+}
+
+var imageTwo = document.getElementById('photo-2');
+imageTwo.addEventListener('click', photoFunction,false);
+function photoFunction() {
+  event.preventDefault();
+  event.stopPropagation();
+  instance[index2].timesClicked++;
+  sourcePhoto.showImage();
+}
+
+var imageThree = document.getElementById('photo-3');
+imageThree.addEventListener('click', photoFunction,false);
+function photoFunction() {
+  event.preventDefault();
+  event.stopPropagation();
+  instance[index3].timesClicked++;
+  sourcePhoto.showImage();
 }
 
 // var h3 = document.getElementById('clicks');
