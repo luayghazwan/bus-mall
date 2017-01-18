@@ -1,0 +1,18 @@
+body {
+  max-width: 100%;
+  height: auto;
+  text-align: center;
+}
+
+#photo-1, #photo-2, #photo-3 {
+  max-width: 25%;
+  height: auto;
+}
+
+.title {
+  text-align: center;
+}
+
+#legend {
+  wid
+}
