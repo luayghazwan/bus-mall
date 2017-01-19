@@ -103,7 +103,7 @@ function photoFunction3() {
 }
 
 function removeListener (){
-  if (maxClicks === 2) {
+  if (maxClicks === 25) {
     console.log('inside if');
     img1.removeEventListener('click', photoFunction1);
     img2.removeEventListener('click', photoFunction2);
