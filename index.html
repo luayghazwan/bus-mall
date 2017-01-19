@@ -4,16 +4,19 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
     <title>Bus Mall</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
   </head>
   <body>
-    <section>
-      <legend id="legend"><div id="voteBlock">Pick for a Photo!</div></legend>
+
+      <legend id="legend"><div class="vote-block">Vote for a Photo!</div></legend>
       <img name="photoOne" id="photo-1" type="image"/>
       <img name="photoTwo" id="photo-2" type="image"/>
       <img name="photoThree" id="photo-3" type="image"/>
-    </section>
-    <h2 id="pageTitle">Statistics - Next branch</h2>
-    <div id="displayImages"></div>
-    <script type="text/javascript" src="app.js"></script>
+
+    <h3 id="clicks">You have clicked:</h3>
+    <canvas id="chart-images" width="600" height="300"></canvas>
+    <script type="text/javascript" src="app.js">
+
+    </script>
   </body>
 </html>
