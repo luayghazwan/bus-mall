@@ -68,7 +68,6 @@ function photoFunction1() {
 img2.addEventListener('click', photoFunction2,false);
 function photoFunction2() {
   instance[currentArary[1]].timesClicked++;
-  console.log('times for photo 2 ' ,instance[index2].timesClicked);
   maxClicks++;
   console.log('max clicks' , maxClicks);
   removeListener();
@@ -85,7 +84,7 @@ function photoFunction3() {
 }
 
 function removeListener (){
-  if (maxClicks === 5) {
+  if (maxClicks === 25) {
     console.log('inside if');
     img1.removeEventListener('click', photoFunction1);
     img2.removeEventListener('click', photoFunction2);
@@ -127,7 +126,6 @@ function createChart () {
       }]
     }
   };
-
   imagesChart = new Chart (context,{
     //second parameter is always an object
     type: 'bar',
