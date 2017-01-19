@@ -83,7 +83,27 @@ function photoFunction() {
   sourcePhoto.showImage();
 }
 
-// var h3 = document.getElementById('clicks');
-// var showImage = document.createElement('p');
-// showImage.textContent = image[index] + '.jpg';
-// h3.appendChild(clicksTimes);
+var context = document.getElementById('chart-images').getContext('2d'); //rendering a 2d chart
+
+var someFunction = {
+  scales: {
+    yAxes: [{
+      ticks: {
+        beginAtZero: true
+      }
+    }]
+  }
+};
+
+var imagesChart = new Chart (context,{ //second parameter is always an object
+  type: 'bar',
+  data: {
+    labels: images,
+    datasets: [{
+      label: 'Votes Bars',
+      data: chartData,
+      backgroundColor: chartColors
+    }]
+  },
+  options: someFunction
+} );
