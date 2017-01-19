@@ -21,6 +21,20 @@ body {
 
 }
 
-.vote-block {
+#voteBlock {
   text-align: center;
+}
+
+#pageTitle {
+
+}
+
+#displayImages {
+  display: inline;
+  float: left;
+}
+
+#displayImages img {
+  max-width: 250px;
+  max-height: 250px;
 }

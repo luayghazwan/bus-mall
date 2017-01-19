@@ -103,7 +103,7 @@ function photoFunction3() {
 }
 
 function removeListener (){
-  if (maxClicks === 3) {
+  if (maxClicks === 2) {
     console.log('inside if');
     img1.removeEventListener('click', photoFunction1);
     img2.removeEventListener('click', photoFunction2);
@@ -111,10 +111,20 @@ function removeListener (){
     img1.remove();
     img2.remove();
     img3.remove();
+    voteBlock.remove();
     showAllImages();
   }
 }
 
+//results page after clicks
 function showAllImages() {
-
+  var imag = document.getElementById('displayImages');
+  for (var i = 0; i < images.length; i++) {
+    var div = document.createElement('div');
+    div.textContent = instance[i].name + ' ' + ' - Times Shown: ' + instance[i].timesShown + ' ' + ' ,Times Clicked: ' + instance[i].timesClicked ;
+    var img = document.createElement('img');
+    img.setAttribute('src',instance[i].path);
+    div.appendChild(img);
+    imag.appendChild(div);
+  }
 }
