@@ -3,8 +3,12 @@
 var counter = 0;
 var instance = [];
 var index1, index2, index3;
+var number;
+var currentArary = [];
 var historyArray = [];
 var maxClicks = 0;
+var imagesChart;
+var chartColors = 'red';
 var images = ['bag','banana','bathroom','boots','breakfast','bubblegum','chair','cthulhu','dog-duck','dragon','pen','pet-sweep','scissors','shark','sweep','tauntaun','unicorn','usb','water-can','wine-glass'];
 // var left = document.getElementById('leftPhoto');
 // var middle = document.getElementById('middlePhoto');
@@ -12,6 +16,7 @@ var images = ['bag','banana','bathroom','boots','breakfast','bubblegum','chair',
 var img1 = document.getElementById('photo-1');
 var img2 = document.getElementById('photo-2');
 var img3 = document.getElementById('photo-3');
+var context = document.getElementById('chart-images').getContext('2d'); //rendering a 2d chart
 
 function Image (name, path) {
   this.name = name;
@@ -30,46 +35,16 @@ console.log('instance',instance);
 
 var sourcePhoto = {
   randomNumber: function() {
-    var index = Math.floor(Math.random() * images.length) + 0;
-    return index;
+    number = Math.floor(Math.random() * images.length) + 0;
+    return number;
   },
   showImage: function() {
-    //Image 1
-    historyArray.push(index1);
-    index1 = this.randomNumber();
-    if(historyArray.includes(index1)){
-      index1 = this.randomNumber();
-    } else {
-      historyArray[0] = index1;
-    }
-    img1.setAttribute('src', instance[index1].path);
-    instance[index1].timesShown++;
-
-    //Image 2
-    historyArray.push(index2);
-    index2 = this.randomNumber();
-    if(historyArray.includes(index2)){
-      index2 = this.randomNumber();
-    } else {
-      historyArray[1] = index2;
-    }
-    img2.setAttribute('src', instance[index2].path);
-    instance[index2].timesShown++;
-
-    //Image 3
-    historyArray.push(index3);
-    index3 = this.randomNumber();
-    if(historyArray.includes(index3)){
-      index3 = this.randomNumber();
-    } else {
-      historyArray[2] = index3;
-    }
-    img3.setAttribute('src', instance[index3].path);
-    instance[index3].timesShown++;
-
-    if (index1 === index2 || index1 === index3 || index2 === index3) {
-      this.showImage();
-    }
+    historyArray = currentArary;
+    currentArary = [];
+    do {
+      this.randomNumber();
+    } while (historyArray.includes(number) || currentArary.includes(number));
+    historyArray.push(currentArary);
   }
 };
 sourcePhoto.showImage();
@@ -103,7 +78,7 @@ function photoFunction3() {
 }
 
 function removeListener (){
-  if (maxClicks === 2) {
+  if (maxClicks === 5) {
     console.log('inside if');
     img1.removeEventListener('click', photoFunction1);
     img2.removeEventListener('click', photoFunction2);
@@ -111,8 +86,9 @@ function removeListener (){
     img1.remove();
     img2.remove();
     img3.remove();
-    voteBlock.remove();
+    // voteBlock.remove();
     showAllImages();
+    createChart();
   }
 }
 
@@ -129,27 +105,33 @@ function showAllImages() {
   }
 }
 
-var context = document.getElementById('chart-images').getContext('2d'); //rendering a 2d chart
+function createChart () {
+  var chartData = [];
+  for (var i = 0 ; i < instance.length; i++) {
+    chartData.push(instance[i].timesClicked);
+    console.log(instance[i].timesClicked);
+  };
+  var chartOptions = {
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true
+        }
+      }]
+    }
+  };
 
-var someFunction = {
-  scales: {
-    yAxes: [{
-      ticks: {
-        beginAtZero: true
-      }
-    }]
-  }
-};
-
-var imagesChart = new Chart (context,{ //second parameter is always an object
-  type: 'bar',
-  data: {
-    labels: images,
-    datasets: [{
-      label: 'Votes Bars',
-      data: chartData,
-      backgroundColor: chartColors
-    }]
-  },
-  options: someFunction
-} );
+  imagesChart = new Chart (context,{
+    //second parameter is always an object
+    type: 'bar',
+    data: {
+      labels: images,
+      datasets: [{
+        label: 'Votes Bars',
+        data: chartData,
+        backgroundColor: chartColors
+      }]
+    },
+    options: chartOptions
+  } );
+}
