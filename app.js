@@ -121,7 +121,7 @@ function showAllImages() {
   var imag = document.getElementById('displayImages');
   for (var i = 0; i < images.length; i++) {
     var div = document.createElement('div');
-    div.textContent = instance[i].name + '\n';
+    div.textContent = instance[i].name + ' ' + ' - Times Shown: ' + instance[i].timesShown + ' ' + ' ,Times Clicked: ' + instance[i].timesClicked ;
     var img = document.createElement('img');
     img.setAttribute('src',instance[i].path);
     div.appendChild(img);
