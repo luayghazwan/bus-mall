@@ -28,6 +28,12 @@ function instanceCreator() {
     instance[index] = new Image(images[index], 'img/' + images[index] + '.jpg');
   }
 }
+
+function persistToLocalStorage () {
+  for (var i = 0; i < images.length; i++) {
+    localStorage.keyToAccumulate = JSON.stringify(instance[i]);
+  }
+};
 instanceCreator();
 console.log('instance',instance);
 
@@ -90,9 +96,9 @@ function removeListener (){
     img1.remove();
     img2.remove();
     img3.remove();
-    // voteBlock.remove();
-    showAllImages();
+    showAllImages(); //to show all photos with their counts after no. of clicks
     createChart();
+    persistToLocalStorage(); //to store our key value to localStorage
   }
 }
 
