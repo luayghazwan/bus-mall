@@ -6,7 +6,6 @@ var number; // new random number
 var instances = [];
 var currentArary = []; // for 3 random numbers
 var historyArray = []; // get the 3 old numbers to check if they are in the array
-var localArray = [];
 var imagesChart;
 
 var chartColors = ['#800080','#FF00FF','#000080','#0000FF','#008080','#00FFFF','#008000','#00FF00','#FF0000','#808080','#800080','#FF00FF','#000080','#0000FF','#008080','#00FFFF','#008000','#00FF00','#FF0000','#808080'];
@@ -92,23 +91,22 @@ function removeListener (){
     img1.remove();
     img2.remove();
     img3.remove();
-    if (!localStorage.key){
-      console.log('empty local storage!');
-      pushingToLocalStorage();
+
+    if (!localStorage.instances) {
+      localStorage.instances = JSON.stringify(instances);
+      console.log('empty local storage! yes!');
     } else {
+      var fromLocalStorage = JSON.parse(localStorage.instances);
+      console.log(fromLocalStorage);
       for (var i = 0; i < instances.length ; i++) {
-        var temp = [];
-        localStorage.key = JSON.parse('');
-        instances[i] = instances[i].timesClicked;
-        localStorage.key = JSON.stringify(instances);
-        instances[i].timesClicked += oldLocalSto[i].timesClicked;
-        localStorage.key = JSON.stringify(instances);
+        instances[i].timesClicked = instances[i].timesClicked + fromLocalStorage[i].timesClicked;
       }
-    };
+    }
+
     showAllImages(); // calling to show all photos with their counts after the clicks
     createChart(); //calling chart to draw the bars percentage per photo
   }
-}
+};
 
 //results page after clicks
 function showAllImages() {
@@ -159,9 +157,5 @@ function createChart () {
 }
 
 //stores to local Storage
-function pushingToLocalStorage() {
-  for (var i = 0 ; i < instances.length ; i++){
-
-  }
-  localStorage.key = JSON.stringify(localArray);
-}
+// function pushingToLocalStorage() {
+//   for (var i = 0 ; i < instances.len
