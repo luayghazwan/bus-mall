@@ -1,9 +1,9 @@
 'use strict';
 
 var counter = 0;
-var maxClicks = 0;
-var instance = [];
-var number;
+var maxClicks = 0; //this goes up to 25 clicks based on the condition at the bottom
+var number; // new random number
+var instances = [];
 var currentArary = []; // for 3 random numbers
 var historyArray = []; // get the 3 old numbers to check if they are in the array
 
@@ -22,13 +22,13 @@ function Image (name, path) {
   this.timesClicked = 0;
 };
 
-function instanceCreator() {
+function instancesCreator() {
   for (var index = 0; index < images.length ; index++) {
-    instance[index] = new Image(images[index], 'img/' + images[index] + '.jpg');
+    instances[index] = new Image(images[index], 'img/' + images[index] + '.jpg');
   }
 }
-instanceCreator();
-console.log('instance',instance);
+instancesCreator();
+console.log('instances',instances);
 
 var sourcePhoto = {
   randomNumber: function() {
@@ -45,9 +45,9 @@ var sourcePhoto = {
       currentArary.push(number);
     }
 
-    img1.setAttribute('src', instance[currentArary[0]].path);
-    img2.setAttribute('src', instance[currentArary[1]].path);
-    img3.setAttribute('src', instance[currentArary[2]].path);
+    img1.setAttribute('src', instances[currentArary[0]].path);
+    img2.setAttribute('src', instances[currentArary[1]].path);
+    img3.setAttribute('src', instances[currentArary[2]].path);
   }
 };
 sourcePhoto.showImage();
@@ -55,16 +55,16 @@ sourcePhoto.showImage();
 //listeners for three images
 img1.addEventListener('click', photoFunction1,false);
 function photoFunction1() {
-  instance[currentArary[0]].timesClicked++;
+  instances[currentArary[0]].timesClicked++;
   maxClicks++;
-  console.log(instance, 'iiiiiii');
+  console.log(instances, 'iiiiiii');
   removeListener();
   sourcePhoto.showImage();
 }
 
 img2.addEventListener('click', photoFunction2,false);
 function photoFunction2() {
-  instance[currentArary[1]].timesClicked++;
+  instances[currentArary[1]].timesClicked++;
   maxClicks++;
   console.log('max clicks' , maxClicks);
   removeListener();
@@ -74,7 +74,7 @@ function photoFunction2() {
 img3.addEventListener('click', photoFunction3,false);
 function photoFunction3() {
   console.log();
-  instance[currentArary[2]].timesClicked++;
+  instances[currentArary[2]].timesClicked++;
   maxClicks++;
   removeListener();
   sourcePhoto.showImage();
@@ -100,14 +100,14 @@ function showAllImages() {
   var imag = document.getElementById('displayImages');
   for (var i = 0; i < images.length; i++) {
     var div = document.createElement('div');
-    div.textContent = instance[i].name;
+    div.textContent = instances[i].name;
 
     var p = document.createElement('p');
-    p.textContent = 'Times Shown: ' + instance[i].timesShown + ' - Times Clicked: ' + instance[i].timesClicked ;
+    p.textContent = 'Times Shown: ' + instances[i].timesShown + ' - Times Clicked: ' + instances[i].timesClicked ;
     div.appendChild(p);
 
     var img = document.createElement('img');
-    img.setAttribute('src',instance[i].path);
+    img.setAttribute('src',instances[i].path);
     div.appendChild(img);
     imag.appendChild(div);
   }
@@ -116,9 +116,9 @@ function showAllImages() {
 //creating the Chart
 function createChart () {
   var chartData = [];
-  for (var i = 0 ; i < instance.length; i++) {
-    chartData.push(instance[i].timesClicked);
-    console.log(instance[i].timesClicked);
+  for (var i = 0 ; i < instances.length; i++) {
+    chartData.push(instances[i].timesClicked);
+    console.log(instances[i].timesClicked);
   };
   var chartOptions = {
     scales: {
