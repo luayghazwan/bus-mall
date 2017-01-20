@@ -8,11 +8,9 @@ var currentArary = [];
 var historyArray = [];
 var maxClicks = 0;
 var imagesChart;
-var chartColors = 'red';
+var chartColors = ['#800080','#FF00FF','#000080','#0000FF','#008080','#00FFFF','#008000','#00FF00','#FF0000','#808080','#800080','#FF00FF','#000080','#0000FF','#008080','#00FFFF','#008000','#00FF00','#FF0000','#808080'];
 var images = ['bag','banana','bathroom','boots','breakfast','bubblegum','chair','cthulhu','dog-duck','dragon','pen','pet-sweep','scissors','shark','sweep','tauntaun','unicorn','usb','water-can','wine-glass'];
-// var left = document.getElementById('leftPhoto');
-// var middle = document.getElementById('middlePhoto');
-// var right =
+
 var img1 = document.getElementById('photo-1');
 var img2 = document.getElementById('photo-2');
 var img3 = document.getElementById('photo-3');
@@ -103,7 +101,12 @@ function showAllImages() {
   var imag = document.getElementById('displayImages');
   for (var i = 0; i < images.length; i++) {
     var div = document.createElement('div');
-    div.textContent = instance[i].name + ' ' + ' - Times Shown: ' + instance[i].timesShown + ' ' + ' ,Times Clicked: ' + instance[i].timesClicked ;
+    div.textContent = instance[i].name;
+
+    var p = document.createElement('p');
+    p.textContent = 'Times Shown: ' + instance[i].timesShown + ' - Times Clicked: ' + instance[i].timesClicked ;
+    div.appendChild(p);
+
     var img = document.createElement('img');
     img.setAttribute('src',instance[i].path);
     div.appendChild(img);

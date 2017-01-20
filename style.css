@@ -2,7 +2,7 @@ body {
   max-width: 100%;
   height: auto;
   text-align: center;
-  background-color: #FFFFBF;
+  background-color: #FFF5E5;
 }
 
 #photo-1, #photo-2, #photo-3 {
@@ -21,20 +21,16 @@ body {
 
 }
 
-#voteBlock {
-  text-align: center;
-}
-
-#pageTitle {
-
-}
-
-#displayImages {
-  display: inline;
-  float: left;
-}
-
-#displayImages img {
+img {
   max-width: 250px;
   max-height: 250px;
+  margin: 20px 30px 10px 30px;
+  box-shadow: 1px 3px 5px 6px #ccc;
+}
+
+.vote-block {
+  text-align: center;
+  padding-top: 10px;
+  font-family: fantasy;
+  color: red;
 }
