@@ -34,3 +34,24 @@ img {
   font-family: fantasy;
   color: red;
 }
+
+#displayImages {
+  max-width: 100%;
+  font-size: 20px;
+}
+#displayImages div {
+  max-width: 33%;
+  display: inline-block;
+  font-size: 25px;
+  font-family: cursive;
+}
+#gap-before-chart {
+  padding-top: 40px;
+}
+p {
+  font-size: 15px;
+  max-width: 15px
+  font-family: monospace;
+  margin: 0px;
+  padding: 0px
+}
