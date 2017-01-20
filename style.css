@@ -48,7 +48,7 @@ img {
   cursor: hand;
 }
 img:hover {
-  border:3px solid green;
+  border:3px groove maroon;
   box-shadow: 0 0 5px #333;
 }
 
@@ -68,6 +68,6 @@ img:hover {
   padding-top: 40px;
 }
 #chart-images {
-  min-width: 100%;
-  max-width: 100%;
+  min-width: auto;
+  max-width: auto;
 }

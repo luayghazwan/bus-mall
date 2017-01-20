@@ -155,7 +155,3 @@ function createChart () {
     options: chartOptions
   } );
 }
-
-//stores to local Storage
-// function pushingToLocalStorage() {
-//   for (var i = 0 ; i < instances.len
