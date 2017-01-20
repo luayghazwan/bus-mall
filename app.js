@@ -1,20 +1,19 @@
 'use strict';
 
 var counter = 0;
+var maxClicks = 0;
 var instance = [];
 var number;
-var index1, index2, index3;
-var currentArary = [];
-var historyArray = [];
-var maxClicks = 0;
-var imagesChart;
+var currentArary = []; // for 3 random numbers
+var historyArray = []; // get the 3 old numbers to check if they are in the array
+
 var chartColors = ['#800080','#FF00FF','#000080','#0000FF','#008080','#00FFFF','#008000','#00FF00','#FF0000','#808080','#800080','#FF00FF','#000080','#0000FF','#008080','#00FFFF','#008000','#00FF00','#FF0000','#808080'];
 var images = ['bag','banana','bathroom','boots','breakfast','bubblegum','chair','cthulhu','dog-duck','dragon','pen','pet-sweep','scissors','shark','sweep','tauntaun','unicorn','usb','water-can','wine-glass'];
 
 var img1 = document.getElementById('photo-1');
 var img2 = document.getElementById('photo-2');
 var img3 = document.getElementById('photo-3');
-var context = document.getElementById('chart-images').getContext('2d'); //rendering a 2d chart
+var context = document.getElementById('chart-images').getContext('2d'); //rendering a 2d chart - WARNING! DONT TYPE "2D" instead of "2d"
 
 function Image (name, path) {
   this.name = name;
@@ -50,10 +49,10 @@ var sourcePhoto = {
     img2.setAttribute('src', instance[currentArary[1]].path);
     img3.setAttribute('src', instance[currentArary[2]].path);
   }
-    // instance[index1].timesShown++;
 };
 sourcePhoto.showImage();
 
+//listeners for three images
 img1.addEventListener('click', photoFunction1,false);
 function photoFunction1() {
   instance[currentArary[0]].timesClicked++;
@@ -81,6 +80,7 @@ function photoFunction3() {
   sourcePhoto.showImage();
 }
 
+//stops listening when we click 25 times
 function removeListener (){
   if (maxClicks === 25) {
     console.log('inside if');
@@ -90,13 +90,12 @@ function removeListener (){
     img1.remove();
     img2.remove();
     img3.remove();
-    // voteBlock.remove();
     showAllImages();
     createChart();
   }
 }
 
-//results page after clicks
+//show images on page - after clicks
 function showAllImages() {
   var imag = document.getElementById('displayImages');
   for (var i = 0; i < images.length; i++) {
@@ -114,6 +113,7 @@ function showAllImages() {
   }
 }
 
+//creating the Chart
 function createChart () {
   var chartData = [];
   for (var i = 0 ; i < instance.length; i++) {
@@ -129,7 +129,7 @@ function createChart () {
       }]
     }
   };
-  imagesChart = new Chart (context,{
+  var imagesChart = new Chart (context,{
     //second parameter is always an object
     type: 'bar',
     data: {
