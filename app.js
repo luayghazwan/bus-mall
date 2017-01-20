@@ -91,18 +91,15 @@ function removeListener (){
     img1.remove();
     img2.remove();
     img3.remove();
-
-    if (!localStorage.instances) {
-      localStorage.instances = JSON.stringify(instances);
-      console.log('empty local storage! yes!');
-    } else {
-      var fromLocalStorage = JSON.parse(localStorage.instances);
-      console.log(fromLocalStorage);
-      for (var i = 0; i < instances.length ; i++) {
-        instances[i].timesClicked = instances[i].timesClicked + fromLocalStorage[i].timesClicked;
+    localStorage.instances = JSON.stringify(instances);
+    var test = JSON.parse(localStorage.getItem('instances'));
+    console.log('tessst', test);
+    if (test.length) {
+      for (var i = 0; i < test.length ; i++){
+        instances[i].timesClicked = instances[i].timesClicked + test[i].timesClicked;
       }
+      localStorage.instances = JSON.stringify(instances);
     }
-
     showAllImages(); // calling to show all photos with their counts after the clicks
     createChart(); //calling chart to draw the bars percentage per photo
   }
