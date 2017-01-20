@@ -92,10 +92,13 @@ function removeListener (){
     img2.remove();
     img3.remove();
     if (!localStorage.key){
+      console.log('empty local storage!');
       pushingToLocalStorage();
     } else {
       for (var i = 0; i < instance.length ; i++) {
-        localArray[i] = instance[i].timesClicked;
+        var temp = [];
+        localStorage.key = JSON.parse('');
+        instance[i] = instance[i].timesClicked;
         localStorage.key = JSON.stringify(instance);
       }
     }
