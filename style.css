@@ -1,6 +1,6 @@
 body {
   max-width: 100%;
-  height: auto;
+  height: 100%;
   text-align: center;
   background-color: #FFF5E5;
 }
@@ -10,15 +10,33 @@ body {
   height: auto;
 }
 
-.title {
-  text-align: center;
+header {
+  min-width: 100%;
+  max-width: 100%;
 }
 
-#legend {
+h3 {
+  text-align: center;
   font-size: 30px;
-  width: auto;
-  padding: 10px 40% 20px;
+  padding: 10px 40% 10px;
+  max-width: 50%;
+  font-family: fantasy;
+  color: red;
+  margin: 0px;
+}
 
+h2 {
+  min-width: 50%;
+  max-width: 100%;
+  font-size: 20px;
+  font-family: fantasy;
+}
+p {
+  font-size: 15px;
+  max-width: 15px
+  font-family: monospace;
+  margin: 0px;
+  padding: 0px
 }
 
 img {
@@ -26,14 +44,15 @@ img {
   max-height: 250px;
   margin: 20px 30px 10px 30px;
   box-shadow: 1px 3px 5px 6px #ccc;
+  cursor: pointer;
+  cursor: hand;
+}
+img:hover {
+  border:3px solid green;
+  box-shadow: 0 0 5px #333;
 }
 
-.vote-block {
-  text-align: center;
-  padding-top: 10px;
-  font-family: fantasy;
-  color: red;
-}
+
 
 #displayImages {
   max-width: 100%;
@@ -48,10 +67,7 @@ img {
 #gap-before-chart {
   padding-top: 40px;
 }
-p {
-  font-size: 15px;
-  max-width: 15px
-  font-family: monospace;
-  margin: 0px;
-  padding: 0px
+#chart-images {
+  min-width: 100%;
+  max-width: 100%;
 }
