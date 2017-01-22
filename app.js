@@ -25,14 +25,12 @@ function Image (name, path) {
   this.timesClicked = 0;
 };
 
-
 function instancesCreator() {
   for (var index = 0; index < images.length ; index++) {
     instances[index] = new Image(images[index], 'img/' + images[index] + '.jpg');
   }
 }
 instancesCreator();
-
 
 //object that does the random number and return a non-duplicate number
 var sourcePhoto = {
@@ -57,7 +55,6 @@ var sourcePhoto = {
 };
 sourcePhoto.showImage();
 
-
 img1.addEventListener('click', photoFunction1,false);
 function photoFunction1() {
   instances[currentArary[0]].timesClicked++;
@@ -79,7 +76,6 @@ function photoFunction3() {
   removeListener();
   sourcePhoto.showImage();
 }
-
 
 function removeListener (){
   if (maxClicks === 25) {
@@ -122,7 +118,6 @@ function showAllImages() {
     imag.appendChild(div);
   }
 }
-
 
 //drawing a chart of our results
 function createChart () {
