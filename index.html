@@ -7,14 +7,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
   </head>
   <body>
-      <legend id="legend"><div class="vote-block">Vote for a Photo!</div></legend>
-      <img name="photoOne" id="photo-1" type="image"/>
-      <img name="photoTwo" id="photo-2" type="image"/>
-      <img name="photoThree" id="photo-3" type="image"/>
+    <header>
+      <h3>Favorite Product Survey</h3>
+      <h2>Vote for your favorite photo and I will show you the statistics!</h2>
+    </header>
+    <img name="photoOne" id="photo-1" type="image"/>
+    <img name="photoTwo" id="photo-2" type="image"/>
+    <img name="photoThree" id="photo-3" type="image"/>
 
     <div id="displayImages"></div>
     <h1 id="gap-before-chart"></h1>
-    <canvas id="chart-images" width="600" height="300"></canvas>
+    <canvas id="chart-images"></canvas>
     <script type="text/javascript" src="app.js">
     </script>
   </body>

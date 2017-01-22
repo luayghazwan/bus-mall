@@ -7,13 +7,17 @@ var instances = [];
 var currentArary = []; // for 3 random numbers
 var historyArray = []; // get the 3 old numbers to check if they are in the array
 
+var imagesChart;
+
 var chartColors = ['#800080','#FF00FF','#000080','#0000FF','#008080','#00FFFF','#008000','#00FF00','#FF0000','#808080','#800080','#FF00FF','#000080','#0000FF','#008080','#00FFFF','#008000','#00FF00','#FF0000','#808080'];
 var images = ['bag','banana','bathroom','boots','breakfast','bubblegum','chair','cthulhu','dog-duck','dragon','pen','pet-sweep','scissors','shark','sweep','tauntaun','unicorn','usb','water-can','wine-glass'];
 
 var img1 = document.getElementById('photo-1');
 var img2 = document.getElementById('photo-2');
 var img3 = document.getElementById('photo-3');
-var context = document.getElementById('chart-images').getContext('2d'); //rendering a 2d chart - WARNING! DONT TYPE "2D" instead of "2d"
+
+var context = document.getElementById('chart-images').getContext('2d'); //rendering a 2d chart
+var imag = document.getElementById('displayImages');
 
 function Image (name, path) {
   this.name = name;
@@ -22,14 +26,16 @@ function Image (name, path) {
   this.timesClicked = 0;
 };
 
+
 function instancesCreator() {
   for (var index = 0; index < images.length ; index++) {
     instances[index] = new Image(images[index], 'img/' + images[index] + '.jpg');
   }
 }
 instancesCreator();
-console.log('instances',instances);
 
+
+//object that does the random number and return a non-duplicate number
 var sourcePhoto = {
   randomNumber: function() {
     number = Math.floor(Math.random() * images.length) + 0;
@@ -52,52 +58,60 @@ var sourcePhoto = {
 };
 sourcePhoto.showImage();
 
-//listeners for three images
+
 img1.addEventListener('click', photoFunction1,false);
 function photoFunction1() {
   instances[currentArary[0]].timesClicked++;
   maxClicks++;
-  console.log(instances, 'iiiiiii');
+
   removeListener();
   sourcePhoto.showImage();
 }
-
 img2.addEventListener('click', photoFunction2,false);
 function photoFunction2() {
   instances[currentArary[1]].timesClicked++;
   maxClicks++;
-  console.log('max clicks' , maxClicks);
+  // console.log('max clicks' , maxClicks);
   removeListener();
   sourcePhoto.showImage();
 }
-
 img3.addEventListener('click', photoFunction3,false);
 function photoFunction3() {
-  console.log();
+
   instances[currentArary[2]].timesClicked++;
   maxClicks++;
   removeListener();
   sourcePhoto.showImage();
 }
 
-//stops listening when we click 25 times
+
 function removeListener (){
   if (maxClicks === 25) {
-    console.log('inside if');
+    // console.log('inside if');
     img1.removeEventListener('click', photoFunction1);
     img2.removeEventListener('click', photoFunction2);
     img3.removeEventListener('click', photoFunction3);
     img1.remove();
     img2.remove();
     img3.remove();
-    showAllImages();
-    createChart();
+
+    localStorage.instances = JSON.stringify(instances);
+    var test = JSON.parse(localStorage.getItem('instances'));
+    console.log('tessst', test);
+    if (test.length) {
+      for (var i = 0; i < test.length ; i++){
+        instances[i].timesClicked = instances[i].timesClicked + test[i].timesClicked;
+      }
+      localStorage.instances = JSON.stringify(instances);
+    }
+    showAllImages(); // calling to show all photos with their counts after the clicks
+    createChart(); //calling chart to draw the bars percentage per photo
+
   }
-}
+};
 
 //show images on page - after clicks
 function showAllImages() {
-  var imag = document.getElementById('displayImages');
   for (var i = 0; i < images.length; i++) {
     var div = document.createElement('div');
     div.textContent = instances[i].name;
@@ -113,12 +127,14 @@ function showAllImages() {
   }
 }
 
-//creating the Chart
+
+//drawing a chart of our results
 function createChart () {
   var chartData = [];
   for (var i = 0 ; i < instances.length; i++) {
     chartData.push(instances[i].timesClicked);
-    console.log(instances[i].timesClicked);
+
+    // console.log(instances[i].timesClicked);
   };
   var chartOptions = {
     scales: {
