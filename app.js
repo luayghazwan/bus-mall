@@ -8,7 +8,6 @@ var currentArary = []; // for 3 random numbers
 var historyArray = []; // get the 3 old numbers to check if they are in the array
 
 var imagesChart;
-
 var chartColors = ['#800080','#FF00FF','#000080','#0000FF','#008080','#00FFFF','#008000','#00FF00','#FF0000','#808080','#800080','#FF00FF','#000080','#0000FF','#008080','#00FFFF','#008000','#00FF00','#FF0000','#808080'];
 var images = ['bag','banana','bathroom','boots','breakfast','bubblegum','chair','cthulhu','dog-duck','dragon','pen','pet-sweep','scissors','shark','sweep','tauntaun','unicorn','usb','water-can','wine-glass'];
 
@@ -63,7 +62,6 @@ img1.addEventListener('click', photoFunction1,false);
 function photoFunction1() {
   instances[currentArary[0]].timesClicked++;
   maxClicks++;
-
   removeListener();
   sourcePhoto.showImage();
 }
@@ -71,13 +69,11 @@ img2.addEventListener('click', photoFunction2,false);
 function photoFunction2() {
   instances[currentArary[1]].timesClicked++;
   maxClicks++;
-  // console.log('max clicks' , maxClicks);
   removeListener();
   sourcePhoto.showImage();
 }
 img3.addEventListener('click', photoFunction3,false);
 function photoFunction3() {
-
   instances[currentArary[2]].timesClicked++;
   maxClicks++;
   removeListener();
