@@ -6,14 +6,15 @@ var number; // new random number
 var instances = [];
 var currentArary = []; // for 3 random numbers
 var historyArray = []; // get the 3 old numbers to check if they are in the array
-var imagesChart;
 
+var imagesChart;
 var chartColors = ['#800080','#FF00FF','#000080','#0000FF','#008080','#00FFFF','#008000','#00FF00','#FF0000','#808080','#800080','#FF00FF','#000080','#0000FF','#008080','#00FFFF','#008000','#00FF00','#FF0000','#808080'];
 var images = ['bag','banana','bathroom','boots','breakfast','bubblegum','chair','cthulhu','dog-duck','dragon','pen','pet-sweep','scissors','shark','sweep','tauntaun','unicorn','usb','water-can','wine-glass'];
 
 var img1 = document.getElementById('photo-1');
 var img2 = document.getElementById('photo-2');
 var img3 = document.getElementById('photo-3');
+
 var context = document.getElementById('chart-images').getContext('2d'); //rendering a 2d chart
 var imag = document.getElementById('displayImages');
 
@@ -24,7 +25,6 @@ function Image (name, path) {
   this.timesClicked = 0;
 };
 
-//creating multiple instances from our object
 function instancesCreator() {
   for (var index = 0; index < images.length ; index++) {
     instances[index] = new Image(images[index], 'img/' + images[index] + '.jpg');
@@ -55,12 +55,10 @@ var sourcePhoto = {
 };
 sourcePhoto.showImage();
 
-//adding event listeners to make our images clickable
 img1.addEventListener('click', photoFunction1,false);
 function photoFunction1() {
   instances[currentArary[0]].timesClicked++;
   maxClicks++;
-  // console.log(instances, 'iiiiiii');
   removeListener();
   sourcePhoto.showImage();
 }
@@ -68,20 +66,17 @@ img2.addEventListener('click', photoFunction2,false);
 function photoFunction2() {
   instances[currentArary[1]].timesClicked++;
   maxClicks++;
-  // console.log('max clicks' , maxClicks);
   removeListener();
   sourcePhoto.showImage();
 }
 img3.addEventListener('click', photoFunction3,false);
 function photoFunction3() {
-  // console.log();
   instances[currentArary[2]].timesClicked++;
   maxClicks++;
   removeListener();
   sourcePhoto.showImage();
 }
 
-//removing listeners when max Clicks reached +  + Calling our LOCAL STORAGE
 function removeListener (){
   if (maxClicks === 25) {
     // console.log('inside if');
@@ -91,6 +86,7 @@ function removeListener (){
     img1.remove();
     img2.remove();
     img3.remove();
+
     localStorage.instances = JSON.stringify(instances);
     var test = JSON.parse(localStorage.getItem('instances'));
     console.log('tessst', test);
@@ -102,10 +98,11 @@ function removeListener (){
     }
     showAllImages(); // calling to show all photos with their counts after the clicks
     createChart(); //calling chart to draw the bars percentage per photo
+
   }
 };
 
-//results page after clicks
+//show images on page - after clicks
 function showAllImages() {
   for (var i = 0; i < images.length; i++) {
     var div = document.createElement('div');
@@ -127,6 +124,7 @@ function createChart () {
   var chartData = [];
   for (var i = 0 ; i < instances.length; i++) {
     chartData.push(instances[i].timesClicked);
+
     // console.log(instances[i].timesClicked);
   };
   var chartOptions = {
@@ -138,7 +136,7 @@ function createChart () {
       }]
     }
   };
-  imagesChart = new Chart (context,{
+  var imagesChart = new Chart (context,{
     //second parameter is always an object
     type: 'bar',
     data: {
