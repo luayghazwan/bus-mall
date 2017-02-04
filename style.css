@@ -57,6 +57,7 @@ img:hover {
 #displayImages {
   max-width: 100%;
   font-size: 20px;
+  pointer-events: none;
 }
 #displayImages div {
   max-width: 33%;
