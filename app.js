@@ -80,17 +80,16 @@ function photoFunction3() {
 function removeListener (){
   if (maxClicks === 25) {
     // console.log('inside if');
-    img1.removeEventListener('click', photoFunction1);
+    img1.removeEventListener('click', photoFunction1); //remove the listener
     img2.removeEventListener('click', photoFunction2);
     img3.removeEventListener('click', photoFunction3);
-    img1.remove();
+    img1.remove(); //remove the image
     img2.remove();
     img3.remove();
 
-    localStorage.instances = JSON.stringify(instances);
     var test = JSON.parse(localStorage.getItem('instances'));
     console.log('tessst', test);
-    if (test.length) {
+    if (test) {
       for (var i = 0; i < test.length ; i++){
         instances[i].timesClicked = instances[i].timesClicked + test[i].timesClicked;
       }
@@ -98,7 +97,7 @@ function removeListener (){
     }
     showAllImages(); // calling to show all photos with their counts after the clicks
     createChart(); //calling chart to draw the bars percentage per photo
-
+    localStorage.instances = JSON.stringify(instances);
   }
 };
 
